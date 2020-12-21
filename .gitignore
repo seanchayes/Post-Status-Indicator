@@ -1,0 +1,28 @@
+# Aptana
+.project
+
+# Mac OS X
+.DS_Store
+
+# NPM
+.sass-cache
+/node_modules
+npm-debug.log
+node_modules
+
+# Composer
+composer.phar
+vendor
+
+# Project
+*.map
+*.min.*
+
+*.lnk
+
+.idea/
+cghooks.lock
+*.iml
+
+# Documentaion
+docs/
