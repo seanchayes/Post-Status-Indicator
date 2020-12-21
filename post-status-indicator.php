@@ -84,20 +84,19 @@ function post_status_indicator() {
 	$colors = isset($psi_options['colors']) ? $psi_options['colors'] : array();
 
 	if ( !empty( $colors ) ) {
-		foreach ( $colors as $post_status => $hex_color ) {
-			if ( 'publish' === $post_status )
+		foreach ( $colors as $color ) {
+			if ( 'publish' === $color['name'] )
 				continue;
 			$custom_css .= '
-.wp-admin .wrap .wp-list-table .status-' . sanitize_title_with_dashes( $post_status ) . ' th.check-column{
-		background: ' . $hex_color . ';
+.wp-admin .wrap .wp-list-table .status-' . sanitize_title_with_dashes( $color['name'] ) . ' th.check-column{
+	background: ' . $color['value'] . ';
 }';
-			if ( true ) { // check setting to see if we need to color these post labels
+			if ( true === $psi_options['color_post_labels'] ) { // check setting to see if we need to color these post labels
 				$custom_css .=
-					'.wp-admin .wrap .subsubsub li.' . sanitize_title_with_dashes( $post_status ) . '{
-		background: ' . $hex_color . ';
-}
-.wp-admin .wrap .subsubsub li.' . sanitize_title_with_dashes( $post_status ) . ' a {
-		mix-blend-mode: color-burn;
+'.wp-admin .wrap .subsubsub li.' . sanitize_title_with_dashes( $color['name'] ) . ' a {
+	background: ' . $color['value'] . ';
+	padding: 5px;
+	border-radius: 2px;
 }';
 			}
 		}
