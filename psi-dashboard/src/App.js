@@ -1,7 +1,18 @@
 import React, { useEffect, useState, memo, useContext } from "react";
 import axios from "axios";
 import Post from './components/Post';
-import { ColorPicker, Button, Notice, ComboboxControl, Snackbar, Panel, PanelBody, PanelRow, HorizontalRule } from '@wordpress/components';
+import {
+  ColorPicker,
+  Button,
+  Notice,
+  ComboboxControl,
+  Snackbar,
+  Panel,
+  PanelBody,
+  PanelRow,
+  HorizontalRule,
+  Spinner
+} from '@wordpress/components';
 import { __ } from "@wordpress/i18n";
 import PsiPanel from './components/PsiPanel';
 import SamplePostsTable from './components/SamplePostsTable';
@@ -88,7 +99,7 @@ const App = () => {
   const PostStatusIndicatorColorPicker = ( ( postStatus ) => {
     const { status } = postStatus;
     return (
-      <Panel header="Post Status Indicator Color">
+      <Panel header="Color">
         <PanelBody>
           <PanelRow>
             {loaded && PostStatusItem(status)}
@@ -100,7 +111,7 @@ const App = () => {
 
   const PostStatusSettings = () => {
     return (
-      <Panel header="Post Status Indicator Settings">
+      <Panel header="Settings">
         <PanelBody>
           {loaded && (<PsiPanel />)}
           <PanelRow>
@@ -198,6 +209,9 @@ const App = () => {
         }
       });
   };
+  const MySpinner = () => (
+    <Spinner />
+  );
 
   const savingNotice = () => {
     return (
@@ -230,19 +244,20 @@ const App = () => {
   return (
   <>
     <h1>Post Status Indicator</h1>
-    <div className={"psi-color-picker-grid"}>
-      <PostStatusIndicatorColorPicker status={postStatus} />
-      <PostStatusSettings />
-    </div>
+    {!loaded && <MySpinner /> || (
+      <div className={"psi-color-picker-grid"}>
+        <PostStatusIndicatorColorPicker status={postStatus} />
+        <PostStatusSettings />
+      </div>)}
     {loaded && !isSaving && (
       <div style={psiSaveStyle}>
-        <SaveButton />
+      <SaveButton />
       </div>
-    )}
+      )}
     {loaded && PostStatusSnackbarNotice()}
     {loaded && <SamplePostsTable posts={posts} />}
   </>
   );
-};
+}
 
 export default App;

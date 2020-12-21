@@ -44,7 +44,7 @@ function post_status_dashboard() {
 		$version = time();
 	}
 
-	wp_enqueue_script('psi-dashboard', PSI_PLUGIN_URL . 'psi-dashboard/dist/js/bundle.js', array( 'wp-api', 'wp-i18n', 'wp-components', 'wp-element' ), PSI_VERSION, true);
+	wp_enqueue_script('psi-dashboard', PSI_PLUGIN_URL . 'psi-dashboard/dist/js/post-status-indicator.js', array( 'wp-api', 'wp-i18n', 'wp-components', 'wp-element' ), PSI_VERSION, true);
 //	wp_enqueue_style('psi-dashboard', PSI_PLUGIN_URL . 'psi-dashboard/dist/css/style.bundle.css', array(), PSI_VERSION);
 
 	$args = array(
