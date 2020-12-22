@@ -17,6 +17,7 @@ import { __ } from "@wordpress/i18n";
 import PsiPanel from './components/PsiPanel';
 import SamplePostsTable from './components/SamplePostsTable';
 import { titleCase } from './utils';
+import { ResetButton } from './components/UiElements';
 
 import { PostStatusIndicatorContext } from './contexts/PostStatusIndicatorContext';
 
@@ -149,22 +150,7 @@ const App = () => {
       </Button>
     )
   }
-  const ResetButton = () => {
-    return (
-      <Button
-        isDestructive
-        icon="no"
-        iconSize={100}
-        isBusy={isSaving}
-        onClick={(e) => {
-          e.preventDefault();
-          resetSettings();
-        }}
-      >
-        {__("Reset", "psi-dashboard")}
-      </Button>
-    )
-  }
+
 
   const loadSettings = () => {
     const rest_url = window.psi_config.rest_url;

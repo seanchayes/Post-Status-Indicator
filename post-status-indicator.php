@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die( 'Invalid request.' );
 }
 
-define( 'PSI_VERSION', '0.11' );
+define( 'PSI_VERSION', '0.2' );
 define( 'PSI_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'PSI_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'PSI_NAMESPACE', 'psi/v1' );
