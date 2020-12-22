@@ -102,7 +102,7 @@ const App = () => {
       <Panel header="Color">
         <PanelBody>
           <PanelRow>
-            {loaded && PostStatusItem(status)}
+            {PostStatusItem(status)}
           </PanelRow>
         </PanelBody>
       </Panel>
@@ -113,7 +113,7 @@ const App = () => {
     return (
       <Panel header="Settings">
         <PanelBody>
-          {loaded && (<PsiPanel />)}
+          <PsiPanel />
           <PanelRow>
             <h4>Reset colors to default</h4>
             <ResetButton />
@@ -209,9 +209,6 @@ const App = () => {
         }
       });
   };
-  const MySpinner = () => (
-    <Spinner />
-  );
 
   const savingNotice = () => {
     return (
@@ -244,7 +241,7 @@ const App = () => {
   return (
   <>
     <h1>Post Status Indicator</h1>
-    {!loaded && <MySpinner /> || (
+    {!loaded && <Spinner /> || (
       <div className={"psi-color-picker-grid"}>
         <PostStatusIndicatorColorPicker status={postStatus} />
         <PostStatusSettings />
@@ -255,7 +252,12 @@ const App = () => {
       </div>
       )}
     {loaded && PostStatusSnackbarNotice()}
-    {loaded && <SamplePostsTable posts={posts} />}
+    {loaded && (
+      <>
+        <h4>Sample all posts screen to review your color choices</h4>
+        <SamplePostsTable posts={posts} />
+      </>
+    )}
   </>
   );
 }
