@@ -165,8 +165,11 @@ class WP_Post_Status_Indicator {
 	public function save_psi_options( $request ){
 		if( $request->get_params() ){
 			$theme_options = $request->get_params();
-			update_option(PSI_OPTIONS, $theme_options);
+			return new WP_REST_Response(
+				update_option(PSI_OPTIONS, $theme_options)
+			);
 		}
+		return new WP_Error( 418 );
 	}
 
 	/**

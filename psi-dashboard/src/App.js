@@ -183,12 +183,13 @@ const App = () => {
       {
         method: "POST",
         body: JSON.stringify(settings),
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          'X-WP-Nonce': window.psi_config.nonce
+        },
       }
     );
-    fetch(request, {
-      headers: psiHeaders,
-    })
+    fetch(request)
       .then((resp) => {
         if(200=== resp.status) {
           setTimeout(() => {
