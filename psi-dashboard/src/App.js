@@ -63,11 +63,13 @@ const App = () => {
    * @type {function(*)}
    */
   const PsiColorPicker = ( ( status ) => {
-    const colors = settings['colors'];
-    const colorAlreadySet = colors.find(({name}) => name === status.status);
+    const colors = settings['colors'] || [];
     let color = '#ff9900';
-    if(colorAlreadySet) {
-      color = colorAlreadySet.value
+    if(colors.length) {
+      const colorAlreadySet = colors.find(({name}) => name === status.status);
+      if( undefined !== colorAlreadySet ) {
+        color = colorAlreadySet.value
+      }
     }
     return (
       <ColorPicker
@@ -123,7 +125,10 @@ const App = () => {
           <PsiPanel />
           <PanelRow>
             <h4>Reset colors to default</h4>
-            <ResetButton />
+            <ResetButton onClickHandler={(e) => {
+              e.preventDefault();
+              resetSettings();
+            }}/>
           </PanelRow>
         </PanelBody>
       </Panel>

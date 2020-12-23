@@ -5,7 +5,7 @@ const Post = (props) => {
   const { post } = props;
   const postStatusIndicatorContext = useContext(PostStatusIndicatorContext);
   const { settings } = postStatusIndicatorContext;
-  const colors = settings['colors'];
+  const colors = settings['colors'] || [];
   const chosenColor = colors.find(({name}) => name === post.post_status);
   let color;
   if(chosenColor) {

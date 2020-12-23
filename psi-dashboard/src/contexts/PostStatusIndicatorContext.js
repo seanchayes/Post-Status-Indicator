@@ -16,7 +16,8 @@ function PostStatusIndicatorContextProvider(props) {
     // const result = settings['colors'].find(({ name }) => name === key.status);
     // Or do we just add the color?
     //Add
-    const result = settings['colors'].find(({ name }) => name === key.status);
+    const colors = settings['colors'] || [];
+    const result = colors.find(({ name }) => name === key.status);
     if(result !== undefined) {
       const filteredColors = settings['colors'].filter(({ name }) => name !== key.status)
       settings['colors'] = filteredColors;

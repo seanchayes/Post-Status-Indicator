@@ -3,10 +3,11 @@ import {__} from "@wordpress/i18n";
 import React, {useContext, useState} from "react";
 import {PostStatusIndicatorContext} from "../contexts/PostStatusIndicatorContext";
 
-export const ResetButton = () => {
+export const ResetButton = (props) => {
   const postStatusIndicatorContext = useContext(PostStatusIndicatorContext);
   const { settings } = postStatusIndicatorContext;
   const [ isSaving, setIsSaving ] = useState(false);
+  const { onClickHandler } = props;
 
   return (
     <Button
@@ -14,10 +15,7 @@ export const ResetButton = () => {
       icon="no"
       iconSize={100}
       isBusy={isSaving}
-      onClick={(e) => {
-        e.preventDefault();
-        resetSettings();
-      }}
+      onClick={onClickHandler}
     >
       {__("Reset", "psi-dashboard")}
     </Button>
