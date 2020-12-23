@@ -38,7 +38,13 @@ const App = () => {
   const psiSaveStyle = {
     padding: '1rem 0',
   };
+  const rest_url = window.psi_config.rest_url;
+  const namespace = window.psi_config.namespace;
 
+  const psiSettingsEndpoint = rest_url + namespace + "/settings";
+  const psiHeaders = {
+    'X-WP-Nonce': window.psi_config.nonce
+  };
   /**
    * Load our settings, set our settings and be ready
    */
@@ -151,12 +157,10 @@ const App = () => {
     )
   }
 
-
   const loadSettings = () => {
-    const rest_url = window.psi_config.rest_url;
-    const namespace = window.psi_config.namespace;
-
-    fetch(rest_url + namespace + "/optionsettings")
+    fetch(psiSettingsEndpoint, {
+      headers: psiHeaders,
+    })
       .then((resp) => resp.json())
       .then((data) => {
         postStatusIndicatorContext.setSettings({ ...defaults, ...data });
@@ -174,42 +178,28 @@ const App = () => {
 
   const saveSettings = () => {
     setIsSaving(true);
-    const rest_url = window.psi_config.rest_url;
-    const namespace = window.psi_config.namespace;
     var request = new Request(
-      rest_url + namespace + "/optionsettings",
+      psiSettingsEndpoint,
       {
         method: "POST",
         body: JSON.stringify(settings),
         headers: { "Content-Type": "application/json" },
       }
     );
-    fetch(request)
+    fetch(request, {
+      headers: psiHeaders,
+    })
       .then((resp) => {
         if(200=== resp.status) {
           setTimeout(() => {
             setIsSaving(false);
-          }, 2200);
+          }, 2000);
         } else {
           console.log("Non-200 response", resp);
         }
       });
   };
 
-  const savingNotice = () => {
-    return (
-      isSaving && (
-        <Notice status="success" isDismissible={false}>
-          <p>
-            {__(
-              "Your settings have been saved.",
-              "psi-dashboard"
-            )}
-          </p>
-        </Notice>
-      )
-    )
-  }
   const PostStatusSnackbarNotice = () => {
     return (
       isSaving && (
@@ -236,8 +226,8 @@ const App = () => {
       <div style={psiSaveStyle}>
       <SaveButton />
       </div>
-      )}
-    {loaded && PostStatusSnackbarNotice()}
+    )}
+    {loaded && isSaving && PostStatusSnackbarNotice()}
     {loaded && (
       <>
         <h4>Sample all posts screen to review your color choices</h4>
