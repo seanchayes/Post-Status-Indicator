@@ -23,12 +23,9 @@ function SamplePostsTable(props) {
             backgroundColor: color,
             marginRight: "0.5rem"
           };
-          const anchorStyle = {
-            color: "#fff"
-          };
           return (
             <li key={`${index}-${status}`} className={status} style={statusStyle}>
-              <a href={'#'} style={anchorStyle}>{titleCase(status)}</a>
+              <a href={'#'}>{titleCase(status)}</a>
             </li>
           )
         }

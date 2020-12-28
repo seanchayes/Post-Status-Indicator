@@ -17,7 +17,7 @@ import { __ } from "@wordpress/i18n";
 import PsiPanel from './components/PsiPanel';
 import SamplePostsTable from './components/SamplePostsTable';
 import { titleCase } from './utils';
-import { ResetButton } from './components/UiElements';
+import { ResetButton, SaveButton, PostStatusSnackbarNotice } from './components/UiElements';
 
 import { PostStatusIndicatorContext } from './contexts/PostStatusIndicatorContext';
 
@@ -73,10 +73,10 @@ const App = () => {
     }
     return (
       <ColorPicker
-        color={ color }
-        onChangeComplete={ ( value ) => {
+        color={color}
+        onChangeComplete={( value ) => {
           postStatusIndicatorContext.updateColor( status, value.hex );
-        } }
+        }}
         disableAlpha
       />
     );
@@ -147,21 +147,6 @@ const App = () => {
     )
   });
 
-  const SaveButton = () => {
-    return (
-      <Button
-        isPrimary
-        isBusy={isSaving}
-        onClick={(e) => {
-          e.preventDefault();
-          saveSettings();
-        }}
-      >
-        {__("Save", "psi-dashboard")}
-      </Button>
-    )
-  }
-
   const loadSettings = () => {
     fetch(psiSettingsEndpoint, {
       headers: psiHeaders,
@@ -206,20 +191,6 @@ const App = () => {
       });
   };
 
-  const PostStatusSnackbarNotice = () => {
-    return (
-      isSaving && (
-        <div style={psiSaveStyle}>
-          <Snackbar>
-            {__(
-              "Your settings have been saved.",
-              "psi-dashboard"
-            )}
-          </Snackbar>
-        </div>
-      )
-    );
-  };
   return (
   <>
     <h1>Post Status Indicator</h1>
@@ -230,7 +201,10 @@ const App = () => {
       </div>)}
     {loaded && !isSaving && (
       <div style={psiSaveStyle}>
-      <SaveButton />
+      <SaveButton onClickHandler={(e) => {
+        e.preventDefault();
+        saveSettings();
+      }} />
       </div>
     )}
     {loaded && isSaving && PostStatusSnackbarNotice()}
