@@ -34,6 +34,7 @@ const App = () => {
   const [ filteredOptions, setFilteredOptions ] = useState([]);
   const [ loaded, setLoaded ] = useState(false);
   const [ isSaving, setIsSaving ] = useState(false);
+  const [ isReset, setIsReset ] = useState(false);
   const options = [];
   const psiSaveStyle = {
     padding: '1rem 0',
@@ -58,6 +59,14 @@ const App = () => {
     setFilteredOptions(options);
   }, []);
 
+  useEffect(() => {
+    if(isReset) {
+      saveSettings();
+      setTimeout(() => {
+        loadSettings();
+      }, 1000);
+    }
+  }, [isReset])
   /**
    * Our color picker that updates settings when a color changes
    * @type {function(*)}
@@ -166,6 +175,7 @@ const App = () => {
     // retain existing menu option so we don't get a page error
     psi_settings.psi_menu_location = settings.psi_menu_location;
     postStatusIndicatorContext.setSettings(psi_settings);
+    setIsReset(true);
   }
 
   const saveSettings = () => {
