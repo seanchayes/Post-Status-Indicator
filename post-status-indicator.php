@@ -68,7 +68,11 @@ class WP_Post_Status_Indicator {
 
 		$screen = get_current_screen();
 
-		if ( 'toplevel_page_psi-slug' !== $screen->base && 'settings_page_psi-slug' !== $screen->base ) {
+		if (
+				'toplevel_page_psi-slug' !== $screen->base &&
+				'settings_page_psi-slug' !== $screen->base &&
+				'tools_page_psi-slug' !== $screen->base
+		) {
 			return;
 		}
 
@@ -190,23 +194,37 @@ class WP_Post_Status_Indicator {
 		}
 
 		if ( $options ) {
-			if ( 'own_menu' === $options['psi_menu_location'] ) {
-				add_menu_page(
-					'Post Status Indicator',
-					'Post Status Indicator',
-					'manage_options',
-					'psi-slug',
-					array( $this, 'psi_options_page_html' )
-				);
-			} else {
-				add_submenu_page(
-					'options-general.php',
-					'Post Status Indicator',
-					'Post Status Indicator',
-					'manage_options',
-					'psi-slug',
-					array( $this, 'psi_options_page_html' )
-				);
+			switch ( $options['psi_menu_location'] ) {
+				case 'settings_menu':
+					add_submenu_page(
+							'options-general.php',
+							'Post Status Indicator',
+							'Post Status Indicator',
+							'manage_options',
+							'psi-slug',
+							array( $this, 'psi_options_page_html' )
+					);
+					break;
+				case 'tools_menu':
+					add_submenu_page(
+							'tools.php',
+							'Post Status Indicator',
+							'Post Status Indicator',
+							'manage_options',
+							'psi-slug',
+							array( $this, 'psi_options_page_html' )
+					);
+					break;
+				default:
+				case 'own_menu':
+					add_menu_page(
+							'Post Status Indicator',
+							'Post Status Indicator',
+							'manage_options',
+							'psi-slug',
+							array( $this, 'psi_options_page_html' )
+					);
+					break;
 			}
 		}
 

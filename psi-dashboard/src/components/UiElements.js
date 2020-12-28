@@ -30,7 +30,7 @@ export const SaveButton = (props) => {
   )
 }
 
-export  const PostStatusSnackbarNotice = (props) => {
+export const PostStatusSnackbarNotice = (props) => {
   const {isSaving} = props;
   const psiSnackStyle = {
     padding: '1rem 0',

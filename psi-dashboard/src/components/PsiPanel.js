@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import {Button, PanelRow, RadioControl, CheckboxControl} from "@wordpress/components";
 import { PostStatusIndicatorContext } from '../contexts/PostStatusIndicatorContext';
 import { __ } from "@wordpress/i18n";
@@ -16,7 +16,6 @@ const PsiPanel = () => {
   else {
     return (
       <>
-        <h4>Select location of this settings page.</h4>
         <PanelRow>
           <RadioControl
             label="Post Status Indicator menu location"
@@ -34,6 +33,13 @@ const PsiPanel = () => {
                 value: "settings_menu",
                 label: __(
                   "Child of Settings menu",
+                  "psi-dashboard"
+                ),
+              },
+              {
+                value: "tools_menu",
+                label: __(
+                  "Child of Tools menu",
                   "psi-dashboard"
                 ),
               },
