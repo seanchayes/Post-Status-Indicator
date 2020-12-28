@@ -1,6 +1,6 @@
 import React, { useEffect, useState, memo, useContext } from "react";
 import axios from "axios";
-import Post from './components/Post';
+import Post from '@Components/Post';
 import {
   ColorPicker,
   Button,
@@ -14,10 +14,10 @@ import {
   Spinner
 } from '@wordpress/components';
 import { __ } from "@wordpress/i18n";
-import PsiPanel from './components/PsiPanel';
-import SamplePostsTable from './components/SamplePostsTable';
-import { titleCase } from './utils';
-import { ResetButton, SaveButton, PostStatusSnackbarNotice } from './components/UiElements';
+import PsiPanel from '@Components/PsiPanel';
+import SamplePostsTable from '@Components/SamplePostsTable';
+import { titleCase } from '@Utils/utils';
+import { ResetButton, SaveButton, PostStatusSnackbarNotice } from '@Components/UiElements';
 
 import { PostStatusIndicatorContext } from './contexts/PostStatusIndicatorContext';
 
@@ -27,7 +27,7 @@ const App = () => {
   const defaults = {
     psi_menu_location: "own_menu",
     color_post_labels: false,
-    colors: [{}]
+    colors: []
   };
   const [ posts, setPosts ] = useState([]);
   const [ postStatus, setPostStatus ] = useState('draft');
@@ -124,7 +124,9 @@ const App = () => {
         <PanelBody>
           <PsiPanel />
           <PanelRow>
-            <h4>Reset colors to default</h4>
+            {__("Reset colors to default: Choosing this option will remove all color settings for each Post Status", "psi-dashboard")}
+          </PanelRow>
+          <PanelRow>
             <ResetButton onClickHandler={(e) => {
               e.preventDefault();
               resetSettings();
@@ -164,7 +166,6 @@ const App = () => {
     // retain existing menu option so we don't get a page error
     psi_settings.psi_menu_location = settings.psi_menu_location;
     postStatusIndicatorContext.setSettings(psi_settings);
-    saveSettings();
   }
 
   const saveSettings = () => {
@@ -187,6 +188,7 @@ const App = () => {
             setIsSaving(false);
           }, 2000);
         } else {
+          setIsSaving(false);
           console.log("Non-200 response", resp);
         }
       });

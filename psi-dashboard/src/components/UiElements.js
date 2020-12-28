@@ -18,7 +18,7 @@ export const ResetButton = (props) => {
 }
 
 export const SaveButton = (props) => {
-  const {onClickHandler, isSaving} = props;
+  const {isSaving, onClickHandler} = props;
   return (
     <Button
       isPrimary

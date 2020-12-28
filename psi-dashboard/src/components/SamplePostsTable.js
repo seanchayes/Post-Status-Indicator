@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
-import Post from "./Post";
-import {PostStatusIndicatorContext} from "../contexts/PostStatusIndicatorContext";
-import { titleCase, hexToHSL } from '../utils';
+import Post from "@Components/Post";
+import {PostStatusIndicatorContext} from "@Contexts/PostStatusIndicatorContext";
+import { titleCase } from '@Utils/utils';
 
 function SamplePostsTable(props) {
   const { posts } = props;

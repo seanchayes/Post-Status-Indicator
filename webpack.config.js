@@ -4,6 +4,14 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const webpackConfig = {
   mode: 'development',
+  context: path.resolve(__dirname, 'psi-dashboard/src'),
+  resolve: {
+    alias: {
+      "@Contexts": path.resolve(__dirname, "psi-dashboard/src/contexts/"),
+      "@Components": path.resolve(__dirname,"psi-dashboard/src/components/"),
+      "@Utils": path.resolve(__dirname, "psi-dashboard/src/utils/")
+    }
+  },
   entry: {
     "post-status-indicator": path.join(__dirname, 'psi-dashboard/src', 'index.js')
   },

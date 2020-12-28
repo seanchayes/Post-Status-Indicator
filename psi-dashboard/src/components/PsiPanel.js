@@ -1,6 +1,6 @@
 import React, {useContext, useState} from "react";
-import {Button, PanelRow, RadioControl, CheckboxControl} from "@wordpress/components";
-import { PostStatusIndicatorContext } from '../contexts/PostStatusIndicatorContext';
+import {Button, PanelRow, RadioControl, CheckboxControl, HorizontalRule} from "@wordpress/components";
+import { PostStatusIndicatorContext } from '@Contexts/PostStatusIndicatorContext';
 import { __ } from "@wordpress/i18n";
 
 const PsiPanel = () => {
@@ -52,6 +52,7 @@ const PsiPanel = () => {
             }}
           />
         </PanelRow>
+        <HorizontalRule />
         <PanelRow>
           <CheckboxControl
             label="Color post labels?"
@@ -64,6 +65,7 @@ const PsiPanel = () => {
             }}
           />
         </PanelRow>
+        <HorizontalRule />
       </>
     );
 

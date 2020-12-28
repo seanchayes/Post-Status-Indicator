@@ -1,5 +1,6 @@
 import React, {useContext} from 'react';
 import {PostStatusIndicatorContext} from "../contexts/PostStatusIndicatorContext";
+import { titleCase } from "@Utils/utils";
 
 const Post = (props) => {
   const { post } = props;
@@ -14,6 +15,10 @@ const Post = (props) => {
   const statusStyle = {
     backgroundColor: color,
   };
+  const StateStyle = {
+    fontWeight: 600,
+    color: "#555"
+  }
   return (
     <tr id={`post-${post.ID}`} className={`status-${post.post_status}`}>
       <th className={"check-column"} style={statusStyle}>
@@ -21,7 +26,7 @@ const Post = (props) => {
       </th>
       <td className="post">
         <a className="row-title" href="#">
-          {post.post_title} - {post.post_status}</a>
+          {post.post_title}</a> <span style={StateStyle}> - {titleCase(post.post_status)}</span>
       </td>
         <td>Post Author</td>
         <td></td>
