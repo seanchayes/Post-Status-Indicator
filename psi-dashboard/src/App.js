@@ -25,9 +25,9 @@ const App = () => {
   const postStatusIndicatorContext = useContext(PostStatusIndicatorContext);
   const { settings } = postStatusIndicatorContext;
   const defaults = {
-    "psi_menu_location": "own_menu",
-    "color_post_labels": false,
-    "colors": []
+    psi_menu_location: "own_menu",
+    color_post_labels: false,
+    colors: [{}]
   };
   const [ posts, setPosts ] = useState([]);
   const [ postStatus, setPostStatus ] = useState('draft');
@@ -128,7 +128,8 @@ const App = () => {
             <ResetButton onClickHandler={(e) => {
               e.preventDefault();
               resetSettings();
-            }}/>
+            }}
+            isSaving={isSaving}/>
           </PanelRow>
         </PanelBody>
       </Panel>
@@ -159,7 +160,7 @@ const App = () => {
   };
 
   const resetSettings = ()  => {
-    let psi_settings = Object.create(defaults);
+    let psi_settings = defaults;
     // retain existing menu option so we don't get a page error
     psi_settings.psi_menu_location = settings.psi_menu_location;
     postStatusIndicatorContext.setSettings(psi_settings);
@@ -204,10 +205,11 @@ const App = () => {
       <SaveButton onClickHandler={(e) => {
         e.preventDefault();
         saveSettings();
-      }} />
+      }}
+      isSaving={isSaving}/>
       </div>
     )}
-    {loaded && isSaving && PostStatusSnackbarNotice()}
+    {loaded && isSaving && <PostStatusSnackbarNotice isSaving={isSaving}/>}
     {loaded && (
       <>
         <h4>Sample all posts screen to review your color choices</h4>

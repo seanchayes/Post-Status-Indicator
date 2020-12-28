@@ -1,17 +1,9 @@
 import {Button, Snackbar} from "@wordpress/components";
 import {__} from "@wordpress/i18n";
-import React, {useContext, useState} from "react";
-import {PostStatusIndicatorContext} from "../contexts/PostStatusIndicatorContext";
+import React, {useState} from "react";
 
 export const ResetButton = (props) => {
-  const postStatusIndicatorContext = useContext(PostStatusIndicatorContext);
-  const { settings } = postStatusIndicatorContext;
-  const [ isSaving, setIsSaving ] = useState(false);
-  const { onClickHandler } = props;
-  const psiSnackStyle = {
-    padding: '1rem 0',
-  };
-
+  const {isSaving, onClickHandler} = props;
   return (
     <Button
       isDestructive
@@ -25,7 +17,8 @@ export const ResetButton = (props) => {
   )
 }
 
-export const SaveButton = () => {
+export const SaveButton = (props) => {
+  const {onClickHandler, isSaving} = props;
   return (
     <Button
       isPrimary
@@ -37,7 +30,11 @@ export const SaveButton = () => {
   )
 }
 
-export  const PostStatusSnackbarNotice = () => {
+export  const PostStatusSnackbarNotice = (props) => {
+  const {isSaving} = props;
+  const psiSnackStyle = {
+    padding: '1rem 0',
+  };
   return (
     isSaving && (
       <div style={psiSnackStyle}>
