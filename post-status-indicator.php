@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 register_uninstall_hook(__FILE__, 'psi_remove_psi_options');
 
 if( !defined( 'PSI_VERSION' ) ) {
-	define( 'PSI_VERSION', '0.3' );
+	define( 'PSI_VERSION', '0.31' );
 }
 
 if( !defined( 'PSI_PLUGIN_PATH' ) ){
