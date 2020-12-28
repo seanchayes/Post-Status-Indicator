@@ -5,7 +5,7 @@ Donate link: https://www.buymeacoffee.com/seanchayes
 Requires at least: 3.8
 Tested up to: 5.6
 Requires PHP: 7.0
-Stable tag: 0.31
+Stable tag: 0.32
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
