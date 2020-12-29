@@ -10,24 +10,22 @@ function SamplePostsTable(props) {
 
   const BreadCrumbs = () => {
     return Object.keys(psi_config.stati).map( (status, index) => {
-    	if ('publish' !== status) { // determine whether we need this - perhaps someone wants to color published items
-        const colors = settings['colors'];
-        const chosenColor = colors.find(({name}) => name === status); // See if we have a custom color for this status
-        let color = 'transparent';
+      const colors = settings['colors'];
+      const chosenColor = colors.find(({name}) => name === status); // See if we have a custom color for this status
+      let color = 'transparent';
 
-        if(chosenColor) {
-          color = chosenColor.value
-        }
-        const statusStyle = {
-          backgroundColor: color,
-          marginRight: "0.5rem"
-        };
-        return (
-          <li key={`${index}-${status}`} className={status} style={statusStyle}>
-            <a href={'#'}>{titleCase(status)}</a>
-          </li>
-        )
+      if(chosenColor) {
+        color = chosenColor.value
       }
+      const statusStyle = {
+        backgroundColor: color,
+        marginRight: "0.5rem"
+      };
+      return (
+        <li key={`${index}-${status}`} className={status} style={statusStyle}>
+          <a href={'#'}>{titleCase(status)}</a>
+        </li>
+      )
     });
   }
   return (

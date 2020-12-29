@@ -126,8 +126,6 @@ if ( !class_exists( 'WP_Post_Status_Indicator' ) ) {
 
 			if ( !empty( $colors ) ) {
 				foreach ( $colors as $color ) {
-					if ( 'publish' === $color['name'] )
-						continue;
 					$custom_css .= '
 	.wp-admin .wrap .wp-list-table .status-' . sanitize_title_with_dashes( $color['name'] ) . ' th.check-column{
 		background: ' . $color['value'] . ';
