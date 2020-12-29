@@ -9,7 +9,7 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Post Status Indicator
- * Plugin URI:        https://www.seanhayes.biz
+ * Plugin URI:        https://www.seanhayes.biz/post-status-indicator-wordpress-plugin/
  * Description:       Adds and allows customization of a visual indicator in WordPress admin for the publish state of your content.
  * Version:           0.5
  * Author:            Sean Hayes
