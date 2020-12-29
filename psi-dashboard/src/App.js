@@ -1,6 +1,5 @@
-import React, { useEffect, useState, memo, useContext } from "react";
-import axios from "axios";
-import Post from '@Components/Post';
+import React, { useEffect, useState, useContext } from "react";
+
 import {
   ColorPicker,
   Button,
@@ -14,16 +13,18 @@ import {
   Spinner
 } from '@wordpress/components';
 import { __ } from "@wordpress/i18n";
+
+import Post from '@Components/Post';
 import PsiPanel from '@Components/PsiPanel';
 import SamplePostsTable from '@Components/SamplePostsTable';
 import { titleCase } from '@Utils/utils';
 import { ResetButton, SaveButton, PostStatusSnackbarNotice } from '@Components/UiElements';
-
 import { PostStatusIndicatorContext } from './contexts/PostStatusIndicatorContext';
 
 const App = () => {
   const postStatusIndicatorContext = useContext(PostStatusIndicatorContext);
   const { settings } = postStatusIndicatorContext;
+  const { isSaveDisabled } = postStatusIndicatorContext;
   const defaults = {
     psi_menu_location: "own_menu",
     color_post_labels: false,
@@ -59,6 +60,9 @@ const App = () => {
     setFilteredOptions(options);
   }, []);
 
+  /**
+   * Reload settings when saved
+   */
   useEffect(() => {
     if(isReset) {
       saveSettings();
@@ -73,7 +77,7 @@ const App = () => {
    */
   const PsiColorPicker = ( ( status ) => {
     const colors = settings['colors'] || [];
-    let color = '#ff9900';
+    let color = '#808080';
     if(colors.length) {
       const colorAlreadySet = colors.find(({name}) => name === status.status);
       if( undefined !== colorAlreadySet ) {
@@ -85,6 +89,7 @@ const App = () => {
         color={color}
         onChangeComplete={( value ) => {
           postStatusIndicatorContext.updateColor( status, value.hex );
+          postStatusIndicatorContext.setIsSaveDisabled(false)
         }}
         disableAlpha
       />
@@ -114,6 +119,10 @@ const App = () => {
     );
   }
 
+  /**
+   * Render Panel and call our Post Status title and color picker component
+   * @type {function(*)}
+   */
   const PostStatusIndicatorColorPicker = ( ( postStatus ) => {
     const { status } = postStatus;
     return (
@@ -127,6 +136,11 @@ const App = () => {
     )
   });
 
+  /**
+   * Basic settings Panel for our plugin
+   * @returns {JSX.Element}
+   * @constructor
+   */
   const PostStatusSettings = () => {
     return (
       <Panel header="Settings">
@@ -147,6 +161,10 @@ const App = () => {
     )
   }
 
+  /**
+   * Post Status title and color picker component
+   * @type {function(*=)}
+   */
   const PostStatusItem = ( (status) => {
     return (
       <PanelRow>
@@ -159,6 +177,9 @@ const App = () => {
     )
   });
 
+  /**
+   * Load settings from WordPress options table
+   */
   const loadSettings = () => {
     fetch(psiSettingsEndpoint, {
       headers: psiHeaders,
@@ -167,17 +188,25 @@ const App = () => {
       .then((data) => {
         postStatusIndicatorContext.setSettings({ ...defaults, ...data });
         setLoaded(true);
+        postStatusIndicatorContext.setIsSaveDisabled(true);
       });
   };
 
+  /**
+   * Reset options in WordPress options table
+   */
   const resetSettings = ()  => {
     let psi_settings = defaults;
     // retain existing menu option so we don't get a page error
     psi_settings.psi_menu_location = settings.psi_menu_location;
     postStatusIndicatorContext.setSettings(psi_settings);
     setIsReset(true);
+    postStatusIndicatorContext.setIsSaveDisabled(true);
   }
 
+  /**
+   * Save settings to WordPress options table
+   */
   const saveSettings = () => {
     setIsSaving(true);
     var request = new Request(
@@ -196,6 +225,7 @@ const App = () => {
         if(200=== resp.status) {
           setTimeout(() => {
             setIsSaving(false);
+            postStatusIndicatorContext.setIsSaveDisabled(true)
           }, 2000);
         } else {
           setIsSaving(false);
@@ -204,6 +234,9 @@ const App = () => {
       });
   };
 
+  /**
+   * Render our admin dashboard page
+   */
   return (
   <>
     <h1>Post Status Indicator</h1>
@@ -218,7 +251,8 @@ const App = () => {
         e.preventDefault();
         saveSettings();
       }}
-      isSaving={isSaving}/>
+      isSaving={isSaving}
+      isSaveDisabled={isSaveDisabled}/>
       </div>
     )}
     {loaded && isSaving && <PostStatusSnackbarNotice isSaving={isSaving}/>}

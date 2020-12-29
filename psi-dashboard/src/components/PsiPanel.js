@@ -6,7 +6,6 @@ import { __ } from "@wordpress/i18n";
 const PsiPanel = () => {
   const postStatusIndicatorContext = useContext(PostStatusIndicatorContext);
   const { settings } = postStatusIndicatorContext;
-
   if (
     postStatusIndicatorContext.settings === {} ||
     !postStatusIndicatorContext.settings.psi_menu_location
@@ -49,6 +48,7 @@ const PsiPanel = () => {
                 "psi_menu_location",
                 value
               );
+              postStatusIndicatorContext.setIsSaveDisabled(false);
             }}
           />
         </PanelRow>

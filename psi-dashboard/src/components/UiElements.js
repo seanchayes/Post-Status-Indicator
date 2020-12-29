@@ -18,11 +18,12 @@ export const ResetButton = (props) => {
 }
 
 export const SaveButton = (props) => {
-  const {isSaving, onClickHandler} = props;
+  const {isSaving, onClickHandler, isSaveDisabled} = props;
   return (
     <Button
       isPrimary
       isBusy={isSaving}
+      disabled={isSaveDisabled}
       onClick={onClickHandler}
     >
       {__("Save", "psi-dashboard")}

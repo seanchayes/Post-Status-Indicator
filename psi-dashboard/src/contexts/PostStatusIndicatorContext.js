@@ -6,6 +6,7 @@ function PostStatusIndicatorContextProvider(props) {
   const [ settings, setSettings ] = useState({});
   const [ isLoading, setIsLoading ] = useState(true);
   const [ color, setColor ] = useState([]);
+  const [ isSaveDisabled, setIsSaveDisabled ] = useState(true);
 
   const updateSetting = (key, value) => {
     setSettings({ ...settings, [key]: value });
@@ -39,6 +40,8 @@ function PostStatusIndicatorContextProvider(props) {
         setColor,
         isLoading,
         setIsLoading,
+        isSaveDisabled,
+        setIsSaveDisabled
       }}
     >
       {props.children}

@@ -5,7 +5,7 @@ Donate link: https://www.buymeacoffee.com/seanchayes
 Requires at least: 3.8
 Tested up to: 5.6
 Requires PHP: 7.0
-Stable tag: 0.41
+Stable tag: 0.5
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,17 +17,17 @@ Adds and allows customization of a visual indicator in WordPress admin for the p
 == Installation ==
 #### Using The WordPress Dashboard
 
-1. Navigate to the \'Add New\' in the plugins dashboard
-2. Search for \'post-status-indicator\'
-3. Click \'Install Now\'
+1. Navigate to the 'Add New' in the plugins dashboard
+2. Search for 'post-status-indicator'
+3. Click 'Install Now'
 4. Activate the plugin on the Plugin dashboard
 
 #### Uploading in WordPress Dashboard
 
-1. Navigate to the \'Add New\' in the plugins dashboard
-2. Navigate to the \'Upload\' area
+1. Navigate to the 'Add New' in the plugins dashboard
+2. Navigate to the 'Upload' area
 3. Select `post-status-indicator.zip` from your computer
-4. Click \'Install Now\'
+4. Click 'Install Now'
 5. Activate the plugin in the Plugin dashboard
 
 #### Using FTP
