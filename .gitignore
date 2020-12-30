@@ -26,3 +26,7 @@ cghooks.lock
 
 # Documentaion
 docs/
+
+.svn
+.svn/wc.db
+.svn/*
