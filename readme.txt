@@ -9,7 +9,7 @@ Stable tag: 1.0
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Adds and allows customization of a visual indicator in WordPress admin for the publish state of your content.
+Allow color customization in WordPress admin for the publish state of your content.
 
 == Description ==
 Adds and allows customization of a visual indicator in WordPress admin for the publish state of your content.
