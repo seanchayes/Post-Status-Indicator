@@ -5,7 +5,7 @@ Donate link: https://www.buymeacoffee.com/seanchayes
 Requires at least: 3.8
 Tested up to: 5.6
 Requires PHP: 7.0
-Stable tag: 0.5
+Stable tag: 1.0
 License: GPL-2.0+
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,6 +13,10 @@ Adds and allows customization of a visual indicator in WordPress admin for the p
 
 == Description ==
 Adds and allows customization of a visual indicator in WordPress admin for the publish state of your content.
+
+The plugin allows you to choose the menu location for the plugin settings page (screen shot #1)
+
+Choose from it's own page or a child of either Settings or Tools menus.
 
 == Installation ==
 #### Using The WordPress Dashboard

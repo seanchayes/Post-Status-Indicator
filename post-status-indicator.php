@@ -11,7 +11,7 @@
  * Plugin Name:       Post Status Indicator
  * Plugin URI:        https://www.seanhayes.biz/post-status-indicator-wordpress-plugin/
  * Description:       Adds and allows customization of a visual indicator in WordPress admin for the publish state of your content.
- * Version:           0.5
+ * Version:           1.0
  * Author:            Sean Hayes
  * Author URI:        https://www.seanhayes.biz
  * Text Domain:       post-status-indicator
@@ -84,7 +84,7 @@ if ( !class_exists( 'WP_Post_Status_Indicator' ) ) {
 				$version = time();
 			}
 
-			wp_enqueue_script('psi-dashboard', PSI_PLUGIN_URL . 'psi-dashboard/dist/js/post-status-indicator.js', array( 'wp-api', 'wp-i18n', 'wp-components', 'wp-element' ), PSI_VERSION, true);
+			wp_enqueue_script('psi-dashboard', PSI_PLUGIN_URL . 'psi-dashboard/dist/js/post-status-indicator.js', array( 'wp-api', 'wp-i18n', 'wp-components', 'wp-element' ), $version, true);
 			//	wp_enqueue_style('psi-dashboard', PSI_PLUGIN_URL . 'psi-dashboard/dist/css/style.bundle.css', array(), PSI_VERSION);
 
 			$args = array(
@@ -103,7 +103,7 @@ if ( !class_exists( 'WP_Post_Status_Indicator' ) ) {
 				'nonce' 	=> wp_create_nonce('wp_rest')
 			);
 			wp_localize_script('psi-dashboard', 'psi_config', $config);
-			wp_enqueue_style( 'post-status-indicator', PSI_PLUGIN_URL . 'css/post-status-indicator.css', array( 'wp-components', 'dashicons' ), PSI_VERSION );
+			wp_enqueue_style( 'post-status-indicator', PSI_PLUGIN_URL . 'css/post-status-indicator.css', array( 'wp-components', 'dashicons' ), $version );
 
 		}
 
@@ -117,7 +117,7 @@ if ( !class_exists( 'WP_Post_Status_Indicator' ) ) {
 				return;
 			}
 
-			wp_register_style( 'post-status-indicator', PSI_PLUGIN_URL . 'css/post-status-indicator.css', array( 'wp-components' ), PSI_VERSION );
+			wp_register_style( 'post-status-indicator', PSI_PLUGIN_URL . 'css/post-status-indicator.css', array( 'wp-components' ), $version );
 			wp_enqueue_style( 'post-status-indicator' );
 
 			$custom_css = '';
