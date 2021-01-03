@@ -50,6 +50,7 @@ if ( !class_exists( 'WP_Post_Status_Indicator' ) ) {
 	class WP_Post_Status_Indicator {
 
 		static $instance = false;
+		private $version;
 
 		private function __construct() {
 
@@ -57,6 +58,12 @@ if ( !class_exists( 'WP_Post_Status_Indicator' ) ) {
 			add_action( 'admin_enqueue_scripts', array( $this, 'post_status_dashboard' ) );
 			add_action( 'admin_menu', array( $this, 'psi_options_page' ) );
 			add_action( 'rest_api_init', array( $this, 'rest_api_init' ) );
+
+			$this->version = PSI_VERSION;
+
+			if( defined('WP_DEBUG') && true === WP_DEBUG ){
+				$this->version = time();
+			}
 		}
 
 		public static function getInstance() {
@@ -78,13 +85,7 @@ if ( !class_exists( 'WP_Post_Status_Indicator' ) ) {
 				return;
 			}
 
-			$version = PSI_VERSION;
-
-			if( defined('WP_DEBUG') && true === WP_DEBUG ){
-				$version = time();
-			}
-
-			wp_enqueue_script('psi-dashboard', PSI_PLUGIN_URL . 'psi-dashboard/dist/js/post-status-indicator.js', array( 'wp-api', 'wp-i18n', 'wp-components', 'wp-element' ), $version, true);
+			wp_enqueue_script('psi-dashboard', PSI_PLUGIN_URL . 'psi-dashboard/dist/js/post-status-indicator.js', array( 'wp-api', 'wp-i18n', 'wp-components', 'wp-element' ), $this->version, true);
 			//	wp_enqueue_style('psi-dashboard', PSI_PLUGIN_URL . 'psi-dashboard/dist/css/style.bundle.css', array(), PSI_VERSION);
 
 			$args = array(
@@ -103,7 +104,7 @@ if ( !class_exists( 'WP_Post_Status_Indicator' ) ) {
 				'nonce' 	=> wp_create_nonce('wp_rest')
 			);
 			wp_localize_script('psi-dashboard', 'psi_config', $config);
-			wp_enqueue_style( 'post-status-indicator', PSI_PLUGIN_URL . 'css/post-status-indicator.css', array( 'wp-components', 'dashicons' ), $version );
+			wp_enqueue_style( 'post-status-indicator', PSI_PLUGIN_URL . 'css/post-status-indicator.css', array( 'wp-components', 'dashicons' ), $this->version );
 
 		}
 
@@ -117,7 +118,7 @@ if ( !class_exists( 'WP_Post_Status_Indicator' ) ) {
 				return;
 			}
 
-			wp_register_style( 'post-status-indicator', PSI_PLUGIN_URL . 'css/post-status-indicator.css', array( 'wp-components' ), $version );
+			wp_register_style( 'post-status-indicator', PSI_PLUGIN_URL . 'css/post-status-indicator.css', array( 'wp-components' ), $this->version );
 			wp_enqueue_style( 'post-status-indicator' );
 
 			$custom_css = '';
