@@ -13,10 +13,11 @@ Allow color customization in WordPress admin for the publish state of your conte
 
 ### Description
 Adds and allows customization of a visual indicator in WordPress admin for the publish state of your content.
+To help you visually organize your content viewing the All Posts screen choose colors for each post status and see your content displayed with those colors
 
-The plugin allows you to choose the menu location for the plugin settings page (screen shot #1)
+The plugin also allows you to choose the menu location for the plugin settings page (screen shot #2)
 
-Choose from it's own page or a child of either Settings or Tools menus.
+Options included letting you choose from it's own page or a child of either Settings or Tools menus.
 
 ### Installation
 #### Using The WordPress Dashboard
@@ -42,10 +43,16 @@ Choose from it's own page or a child of either Settings or Tools menus.
 4. Activate the plugin in the Plugin dashboard
 
 #### Changelog
+
+##### 1.0.1 (2021-01-07) #####
+* Fixing version variable not found warning
+* Swapping screenshot images
+* Updating readme
+
 ##### 1.0 #####
 * First version
 
 #### Screenshots
 
-1. The Post Status Indicator settings page
-2. The Post Status Indicator sample posts displaying color changes
+1. The Post Status Indicator sample posts displaying color changes
+2. The Post Status Indicator settings page
